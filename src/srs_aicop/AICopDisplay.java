@@ -477,12 +477,17 @@ public class AICopDisplay extends javax.swing.JFrame {
                     
                     if(violation != ViolationType.NoViolation){
                         sleep(4000);
-                        jLabel11.setText("Camera captures the pictures of Car and sends to AICop ...");
-                        sleep(4000);
+                     
+                        CapturedImages capImages = new CapturedImages();
+                        capImages.setVisible(true);
+                        sleep(5000);
+                        capImages.setVisible(false);
+                        sleep(1000);
+                        jLabel11.setText("Camera sends the pictures of Car to AICop ...");
                         
                         Integer idx = 10-((int)Math.round((Math.random())*(10)));
                         owner = owners[idx];
-                        
+                        sleep(4000);
                         jLabel12.setText("AICop digitizes the image and identifies the Car Plate No." + owner.getPlateNumber() +" ...");
                         sleep(4000);
                         jLabel13.setText("AICop collects following details from DMV Database: ... ");
