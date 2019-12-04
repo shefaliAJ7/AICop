@@ -158,7 +158,7 @@ public class AICopDisplay extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/traffic_light.PNG"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/traffic_light.PNG"))); // NOI18N
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
@@ -208,7 +208,7 @@ public class AICopDisplay extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/speed_limit.PNG"))); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/speed_limit.PNG"))); // NOI18N
 
         jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
 
@@ -431,7 +431,7 @@ public class AICopDisplay extends javax.swing.JFrame {
         buttonGroup1.clearSelection();
         buttonGroup2.clearSelection();
         
-        filePath = getClass().getResource("/srs_aicop/traffic_light.PNG");
+        filePath = getClass().getResource("/srs_aicop/res/traffic_light.PNG");
         jLabel3.setIcon(new ImageIcon(filePath));
         
         jLabel5.setIcon(null);
@@ -470,17 +470,17 @@ public class AICopDisplay extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if(jRadioButton1.isSelected())
-            filePath = getClass().getResource("/srs_aicop/red.PNG");
+            filePath = getClass().getResource("/srs_aicop/res/red.PNG");
         else if(jRadioButton2.isSelected())
-            filePath = getClass().getResource("/srs_aicop/yellow.PNG");
+            filePath = getClass().getResource("/srs_aicop/res/yellow.PNG");
         else if(jRadioButton3.isSelected())
-            filePath = getClass().getResource("/srs_aicop/green.PNG");
+            filePath = getClass().getResource("/srs_aicop/res/green.PNG");
         else
-            filePath = getClass().getResource("/srs_aicop/traffic_light.PNG");
+            filePath = getClass().getResource("/srs_aicop/res/traffic_light.PNG");
         
         jLabel3.setIcon(new ImageIcon(filePath));
         
-        filePath = getClass().getResource("/srs_aicop/car.PNG");
+        filePath = getClass().getResource("/srs_aicop/res/car.PNG");
         Thread queryThread = new Thread() {
             public void run() {
                 try{
@@ -504,7 +504,7 @@ public class AICopDisplay extends javax.swing.JFrame {
                         sleep(4000);
                         if(jRadioButton1.isSelected()){
 
-                            filePath = getClass().getResource("/srs_aicop/no.PNG");
+                            filePath = getClass().getResource("/srs_aicop/res/no.PNG");
                             jLabel9.setIcon(new ImageIcon(filePath));
 
                             if(Integer.parseInt(speed) > maxSpeed){
@@ -521,7 +521,7 @@ public class AICopDisplay extends javax.swing.JFrame {
                         }
                         else if(jRadioButton2.isSelected() || jRadioButton3.isSelected()){
                             if(Integer.parseInt(speed) > maxSpeed){
-                                filePath = getClass().getResource("/srs_aicop/no.PNG");
+                                filePath = getClass().getResource("/srs_aicop/res/no.PNG");
                                 jLabel9.setIcon(new ImageIcon(filePath));
                                 violation = ViolationType.SpeedViolation;
                                 jLabel10.setText("Speeding Violation Detected");
@@ -529,7 +529,7 @@ public class AICopDisplay extends javax.swing.JFrame {
 
                             else{
                                 violation = ViolationType.NoViolation;
-                                filePath = getClass().getResource("/srs_aicop/yes.PNG");
+                                filePath = getClass().getResource("/srs_aicop/res/yes.PNG");
                                 jLabel9.setIcon(new ImageIcon(filePath));
                                 jLabel10.setText("No Violation Detected");
                             }
@@ -593,7 +593,7 @@ public class AICopDisplay extends javax.swing.JFrame {
                             violation = ViolationType.NoViolation;
                             jLabel4.setText("Sensor detects Car has stopped ...");
                             sleep(4000);
-                            filePath = getClass().getResource("/srs_aicop/yes.PNG");
+                            filePath = getClass().getResource("/srs_aicop/res/yes.PNG");
                             jLabel9.setIcon(new ImageIcon(filePath));
                             jLabel10.setText("No Violation Detected");
                         }

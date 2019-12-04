@@ -41,19 +41,19 @@ public class CapturedImages extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/cam1.PNG"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/cam1.PNG"))); // NOI18N
         jLabel1.setText("jLabel1");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/cam2.PNG"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/cam2.PNG"))); // NOI18N
         jLabel2.setText("jLabel1");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/cam3.PNG"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/cam3.PNG"))); // NOI18N
         jLabel3.setText("jLabel1");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/cam3.PNG"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/cam4.PNG"))); // NOI18N
         jLabel4.setText("jLabel1");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/cam5.PNG"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/cam5.PNG"))); // NOI18N
         jLabel5.setText("jLabel1");
 
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N

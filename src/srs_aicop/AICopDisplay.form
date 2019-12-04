@@ -313,7 +313,7 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/srs_aicop/traffic_light.PNG"/>
+          <Image iconType="3" name="/srs_aicop/res/traffic_light.PNG"/>
         </Property>
       </Properties>
     </Component>
@@ -429,7 +429,7 @@
     <Component class="javax.swing.JLabel" name="jLabel16">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/srs_aicop/speed_limit.PNG"/>
+          <Image iconType="3" name="/srs_aicop/res/speed_limit.PNG"/>
         </Property>
       </Properties>
     </Component>
