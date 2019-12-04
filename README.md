@@ -5,7 +5,7 @@ Our Prototype in Phase 2 is a simulation of how our entire AICop system will beh
 This Prototype is a Java Swing Application, created using Java as the programming language and Java Swing as the framework. It explains different use cases more graphically, which will be easy to understand for the stakeholders.They will be able to understand how the AICop will work behind the scenes in determining Traffic Violation using sensors and camera and also how Violation Tickets will be issued to the defaulters.
 We took a video of the prototype and here is the link (https://youtu.be/LpzGOL_arHs).
 
-1. We have SRS_AICop.jar which is a deployable Jar File and can be run in any OS, wihout the need of any external Software Doenload.
+1. We have SRS_AICop.jar which is a deployable Jar File and can be run in any OS, wihout the need of any external Software Download.
 To run this, just double click on SRS_AICop.jar
 
 2. To run the source code:
