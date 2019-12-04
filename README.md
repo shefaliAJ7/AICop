@@ -8,10 +8,10 @@ We took a video of the prototype and here is the link (https://youtu.be/LpzGOL_a
 1. We have SRS_AICop.jar which is a deployable Jar File and can be run in any OS, wihout the need of any external Software Download.
 To run this, just double click on SRS_AICop.jar
 
-2. To run the source code:
-  a. Open any IDE which supports Java Programming language (Eclipse, Neatbeans or Intellij).
-  b. Import this project as JAVA project.
-  c. Go to SRS_AICop\src\srs_aicop\SRS_AICop.java and do 'Run as Java Application'.
+2. To run the source code: <br>
+  a. Open any IDE which supports Java Programming language (Eclipse, Neatbeans or Intellij). <br>
+  b. Import this project as JAVA project. <br>
+  c. Go to SRS_AICop\src\srs_aicop\SRS_AICop.java and do 'Run as Java Application'. <br>
 
 Instructions to run the Application:
 1. After running the application by Step 1 or 2, a Window opens.
