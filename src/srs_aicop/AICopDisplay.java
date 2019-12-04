@@ -31,6 +31,7 @@ public class AICopDisplay extends javax.swing.JFrame {
     ViolationType violation;
     CarOwner[] owners;
     CarOwner owner;
+    Thread queryThread;
     
     public AICopDisplay() {
         initComponents();
@@ -464,6 +465,7 @@ public class AICopDisplay extends javax.swing.JFrame {
         jLabel22.setText("");
         jLabel23.setText("");
         jLabel24.setText("");
+        queryThread.interrupt();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -481,7 +483,7 @@ public class AICopDisplay extends javax.swing.JFrame {
         jLabel3.setIcon(new ImageIcon(filePath));
         
         filePath = getClass().getResource("/srs_aicop/res/car.PNG");
-        Thread queryThread = new Thread() {
+        queryThread = new Thread() {
             public void run() {
                 try{
                     if(jRadioButton4.isSelected()){
