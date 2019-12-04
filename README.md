@@ -16,8 +16,8 @@ To run this, just double click on SRS_AICop.jar
 Instructions to run the Application:
 1. After running the application by Step 1 or 2, a Window opens.
 2. On the left side of the Window Frame, Click on 'Red', 'Green' or 'Yellow' radio button, which represents Traffic light.
-3. Click on 'Car Stopped' or 'Car moved' radio button.
-4. If you click on 'Car moved', mention speed on the Textbox next to 'Car moved' radio button.
+3. Click on 'Car Stopped' or 'Car moved with speed:' radio button.
+4. If you click on 'Car moved with speed:', mention speed on the Textbox next to 'Car moved with speed:' radio button.
 5. Click on 'Check Violation' Button.
 6. Steps 1-5 helps in giving different Input Scenarios.
 7. You will see the output results, after 4-5 seconds of wait-time.
