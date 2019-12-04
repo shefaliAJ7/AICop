@@ -25,12 +25,13 @@ public class AICopDisplay extends javax.swing.JFrame {
     /**
      * Creates new form AICopDisplay
      */
-    ClassLoader loader;
+    //ClassLoader loader;
     URL filePath;
     Integer maxSpeed;
     ViolationType violation;
     CarOwner[] owners;
     CarOwner owner;
+    Thread queryThread;
     
     public AICopDisplay() {
         initComponents();
@@ -70,14 +71,9 @@ public class AICopDisplay extends javax.swing.JFrame {
         owners[9] = new CarOwner("Shefali", "#3 1260 E University St Tempe AZ ",
             "112311", "480987506", "Nissan R390 GT1", "123675439", "TL62 30K", "Private");
         
-        loader = AICopDisplay.class.getClassLoader();
+        //loader = AICopDisplay.class.getClassLoader();
         maxSpeed = 30;
         violation = ViolationType.NoViolation;
-        filePath = loader.getResource("resources/traffic_light.png");
-        jLabel3.setIcon(new ImageIcon(filePath));
-        filePath = loader.getResource("resources/speed_limit.png");
-        jLabel16.setIcon(new ImageIcon(filePath));
-        jButton2.setVisible(false);
     }
 
     /**
@@ -163,6 +159,8 @@ public class AICopDisplay extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/traffic_light.PNG"))); // NOI18N
+
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jRadioButton4.setText("Car Moved with speed : ");
@@ -202,7 +200,7 @@ public class AICopDisplay extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
 
         jButton2.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
-        jButton2.setText("Ticket Issued");
+        jButton2.setText("Check Violation");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -210,6 +208,8 @@ public class AICopDisplay extends javax.swing.JFrame {
         });
 
         jLabel15.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/srs_aicop/res/speed_limit.PNG"))); // NOI18N
 
         jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
 
@@ -294,26 +294,29 @@ public class AICopDisplay extends javax.swing.JFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jRadioButton5)
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jRadioButton5)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioButton4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)))
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -332,7 +335,8 @@ public class AICopDisplay extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jRadioButton4)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,10 +371,8 @@ public class AICopDisplay extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton2)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
@@ -405,143 +407,24 @@ public class AICopDisplay extends javax.swing.JFrame {
     
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
-        filePath = loader.getResource("resources/red.png");
-        jLabel3.setIcon(new ImageIcon(filePath));
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
-        filePath = loader.getResource("resources/yellow.png");
-        jLabel3.setIcon(new ImageIcon(filePath));
+        
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
-        filePath = loader.getResource("resources/green.png");
-        jLabel3.setIcon(new ImageIcon(filePath));
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
         // TODO add your handling code here:
-        filePath = loader.getResource("resources/car.png");
-        Thread queryThread = new Thread() {
-            public void run() {
-                try{
-                    jLabel5.setIcon(new ImageIcon(filePath));
-                    sleep(300);
-                    jLabel5.setEnabled(false);
-                    jLabel6.setIcon(new ImageIcon(filePath));
-                    sleep(300);
-                    jLabel6.setEnabled(false);
-                    jLabel7.setIcon(new ImageIcon(filePath));
-                    sleep(300);
-                    jLabel7.setEnabled(false);
-                    jLabel8.setIcon(new ImageIcon(filePath));
-                    sleep(300);
-                    jLabel8.setEnabled(false);
-
-                    String speed = jTextField1.getText();
-                    jLabel4.setText("Sensor detects Car was moving with speed " + speed + " mph ...");
-                    sleep(2000);
-                    if(jRadioButton1.isSelected()){
-                        
-                        filePath = loader.getResource("resources/no.png");
-                        jLabel9.setIcon(new ImageIcon(filePath));
-                        
-                        if(Integer.parseInt(speed) > maxSpeed){
-                           violation = ViolationType.SpeedSignalViolation;
-                           jLabel10.setText("Speed and Traffic Signal Violation Detected");
-                        }
-                        else{
-                            violation = ViolationType.SignalViolation;
-                            jLabel10.setText("Traffic Signal Violation Detected");
-                        }
-                        
-                        
-                        
-                    }
-                    else if(jRadioButton2.isSelected() || jRadioButton3.isSelected()){
-                        if(Integer.parseInt(speed) > maxSpeed){
-                            filePath = loader.getResource("resources/no.png");
-                            jLabel9.setIcon(new ImageIcon(filePath));
-                            violation = ViolationType.SpeedViolation;
-                            jLabel10.setText("Speeding Violation Detected");
-                        }
-
-                        else{
-                            filePath = loader.getResource("resources/yes.png");
-                            jLabel9.setIcon(new ImageIcon(filePath));
-                            jLabel10.setText("No Violation Detected");
-                        }
-                    }
-                    
-                    if(violation != ViolationType.NoViolation){
-                        sleep(4000);
-                     
-                        CapturedImages capImages = new CapturedImages();
-                        capImages.setVisible(true);
-                        sleep(5000);
-                        capImages.setVisible(false);
-                        sleep(1000);
-                        jLabel11.setText("Camera sends the pictures of Car to AICop ...");
-                        
-                        Integer idx = 10-((int)Math.round((Math.random())*(10)));
-                        owner = owners[idx];
-                        sleep(4000);
-                        jLabel12.setText("AICop digitizes the image and identifies the Car Plate No." + owner.getPlateNumber() +" ...");
-                        sleep(4000);
-                        jLabel13.setText("AICop collects following details from DMV Database: ... ");
-                        jLabel17.setText("Name: " + owner.getOwnerName());
-                        jLabel18.setText("Registration #: " + owner.getRegistrationNo());
-                        jLabel19.setText("License #: " + owner.getLicenceNumber());
-                        jLabel20.setText("Plate #: " + owner.getPlateNumber());
-                        jLabel21.setText("Model: " + owner.getCarModel());
-                        jLabel22.setText("Car Type: "+ owner.getCarType());
-                        jLabel23.setText("Contact #:"+ owner.getPhoneNumber());
-                        jLabel24.setText("Address: " + owner.getOwnerAddress());
-                        
-                        sleep(5000);
-                        if(owner.carType == "Private"){
-                            jButton2.setVisible(true);
-                            jLabel15.setText("Ticket sent to the Violator ...");
-                        }
-                        else{
-                            jLabel14.setText("No Ticket Issued ...");
-                        }
-                    }
-                }
-                catch (Exception ex){
-                    ex.getMessage();
-                }
-            }
-        };
-        queryThread.start();
+        
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
-        filePath = loader.getResource("resources/car.png");
-        Thread queryThread = new Thread() {
-            public void run() {
-                try{
-                    jLabel5.setIcon(new ImageIcon(filePath));
-                    sleep(300);
-                    jLabel5.setEnabled(false);
-                    jLabel6.setIcon(new ImageIcon(filePath));
-                
-                    if(jRadioButton1.isSelected()){
-                        jLabel4.setText("Sensor detects Car has stopped ...");
-                        sleep(4000);
-                        filePath = loader.getResource("resources/yes.png");
-                        jLabel9.setIcon(new ImageIcon(filePath));
-                        jLabel10.setText("No Violation Detected");
-                    }
-                }
-                catch (Exception ex){
-                    ex.getMessage();
-                }
-            }
-        };
-        queryThread.start();
+        
     }//GEN-LAST:event_jRadioButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -549,7 +432,7 @@ public class AICopDisplay extends javax.swing.JFrame {
         buttonGroup1.clearSelection();
         buttonGroup2.clearSelection();
         
-        filePath = loader.getResource("resources/traffic_light.png");
+        filePath = getClass().getResource("/srs_aicop/res/traffic_light.PNG");
         jLabel3.setIcon(new ImageIcon(filePath));
         
         jLabel5.setIcon(null);
@@ -582,19 +465,148 @@ public class AICopDisplay extends javax.swing.JFrame {
         jLabel22.setText("");
         jLabel23.setText("");
         jLabel24.setText("");
-        jButton2.setVisible(false);
+        queryThread.interrupt();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        TicketDisplay ticket = new TicketDisplay(owner, violation);
-        ticket.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        ticket.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                //System.out.println("WindowClosingDemo.windowClosing");
-                ticket.setVisible(false);
+
+        if(jRadioButton1.isSelected())
+            filePath = getClass().getResource("/srs_aicop/res/red.PNG");
+        else if(jRadioButton2.isSelected())
+            filePath = getClass().getResource("/srs_aicop/res/yellow.PNG");
+        else if(jRadioButton3.isSelected())
+            filePath = getClass().getResource("/srs_aicop/res/green.PNG");
+        else
+            filePath = getClass().getResource("/srs_aicop/res/traffic_light.PNG");
+        
+        jLabel3.setIcon(new ImageIcon(filePath));
+        
+        filePath = getClass().getResource("/srs_aicop/res/car.PNG");
+        queryThread = new Thread() {
+            public void run() {
+                try{
+                    if(jRadioButton4.isSelected()){
+                        jLabel5.setIcon(new ImageIcon(filePath));
+                        sleep(300);
+                        jLabel5.setEnabled(false);
+                        jLabel6.setIcon(new ImageIcon(filePath));
+                        sleep(300);
+                        jLabel6.setEnabled(false);
+                        jLabel7.setIcon(new ImageIcon(filePath));
+                        sleep(300);
+                        jLabel7.setEnabled(false);
+                        jLabel8.setIcon(new ImageIcon(filePath));
+                        sleep(300);
+                        jLabel8.setEnabled(false);
+
+                        sleep(4000);
+                        String speed = jTextField1.getText();
+                        jLabel4.setText("Sensor detects Car was moving with speed " + speed + " mph ...");
+                        sleep(4000);
+                        if(jRadioButton1.isSelected()){
+
+                            filePath = getClass().getResource("/srs_aicop/res/no.PNG");
+                            jLabel9.setIcon(new ImageIcon(filePath));
+
+                            if(Integer.parseInt(speed) > maxSpeed){
+                               violation = ViolationType.SpeedSignalViolation;
+                               jLabel10.setText("Speed and Traffic Signal Violation Detected");
+                            }
+                            else{
+                                violation = ViolationType.SignalViolation;
+                                jLabel10.setText("Traffic Signal Violation Detected");
+                            }
+
+
+
+                        }
+                        else if(jRadioButton2.isSelected() || jRadioButton3.isSelected()){
+                            if(Integer.parseInt(speed) > maxSpeed){
+                                filePath = getClass().getResource("/srs_aicop/res/no.PNG");
+                                jLabel9.setIcon(new ImageIcon(filePath));
+                                violation = ViolationType.SpeedViolation;
+                                jLabel10.setText("Speeding Violation Detected");
+                            }
+
+                            else{
+                                violation = ViolationType.NoViolation;
+                                filePath = getClass().getResource("/srs_aicop/res/yes.PNG");
+                                jLabel9.setIcon(new ImageIcon(filePath));
+                                jLabel10.setText("No Violation Detected");
+                            }
+                        }
+
+                        if(violation != ViolationType.NoViolation){
+                            sleep(5000);
+
+                            CapturedImages capImages = new CapturedImages();
+                            capImages.setVisible(true);
+                            sleep(10000);
+                            capImages.setVisible(false);
+                            sleep(3000);
+                            jLabel11.setText("Camera sends the pictures of Car to AICop ...");
+
+                            Integer idx = 10-((int)Math.round((Math.random())*(10)));
+                            owner = owners[idx];
+                            sleep(4000);
+                            jLabel12.setText("AICop digitizes the image and identifies the Car Plate No." + owner.getPlateNumber() +" ...");
+                            sleep(4000);
+                            jLabel13.setText("AICop collects following details from DMV Database: ... ");
+                            jLabel17.setText("Name: " + owner.getOwnerName());
+                            jLabel18.setText("Registration #: " + owner.getRegistrationNo());
+                            jLabel19.setText("License #: " + owner.getLicenceNumber());
+                            jLabel20.setText("Plate #: " + owner.getPlateNumber());
+                            jLabel21.setText("Model: " + owner.getCarModel());
+                            jLabel22.setText("Car Type: "+ owner.getCarType());
+                            jLabel23.setText("Contact #:"+ owner.getPhoneNumber());
+                            jLabel24.setText("Address: " + owner.getOwnerAddress());
+
+                            sleep(7000);
+                            if(owner.carType == "Private"){
+                                jLabel14.setText("Ticket Issued ...");
+                                sleep(2000);
+                                TicketDisplay ticket = new TicketDisplay(owner, violation);
+                                ticket.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                                ticket.addWindowListener(new WindowAdapter() {
+                                    public void windowClosing(WindowEvent e) {
+                                        //System.out.println("WindowClosingDemo.windowClosing");
+                                        ticket.setVisible(true);
+                                    }
+                                });
+                                sleep(10000);
+                                ticket.setVisible(false);
+                                sleep(2000);
+                                jLabel15.setText("Ticket sent to the Violator ...");
+                            }
+                            else{
+                                jLabel14.setText("No Ticket Issued ...");
+                            }
+                        }
+                    }
+                    else if(jRadioButton5.isSelected()){
+                        jLabel5.setIcon(new ImageIcon(filePath));
+                        sleep(300);
+                        jLabel5.setEnabled(false);
+                        jLabel6.setIcon(new ImageIcon(filePath));
+                        
+                        sleep(4000);
+                        if(jRadioButton1.isSelected()){
+                            violation = ViolationType.NoViolation;
+                            jLabel4.setText("Sensor detects Car has stopped ...");
+                            sleep(4000);
+                            filePath = getClass().getResource("/srs_aicop/res/yes.PNG");
+                            jLabel9.setIcon(new ImageIcon(filePath));
+                            jLabel10.setText("No Violation Detected");
+                        }
+                    }
+                }
+                catch (Exception ex){
+                    ex.getMessage();
+                }
             }
-        });
+        };
+        queryThread.start();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
